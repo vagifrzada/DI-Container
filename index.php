@@ -11,4 +11,10 @@ require __DIR__ .'/vendor/autoload.php';
 
 $di = new \Vagif\Container;
 
-var_dump($di);
+$di->bind('aws', function () {
+    return new class {
+        public $name = 'AWS Services';
+    };
+});
+
+echo $di;
