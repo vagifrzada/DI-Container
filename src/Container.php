@@ -14,6 +14,7 @@ class Container
      * 
      * @param string $name Name of the service
      * @param callable $callable Callable
+     * @return void
      */
     public function bind(string $name, callable $callable) : void
     {
