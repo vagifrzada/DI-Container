@@ -12,6 +12,9 @@
     "require": {
         "php": ">=7.0.0"
     },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.*"
+    },
     "autoload": {
         "psr-4": {
             "Vagif\\": "src/"

@@ -15,8 +15,8 @@ class Container
      * Binding services to container
      * (User can override the service)
      * 
-     * @param string $name Name of the service
-     * @param callable $callable Callable
+     * @param  string   $name     Name of the service
+     * @param  callable $callable Callable
      * @return void
      */
     public function bind(string $name, callable $callable): void
@@ -27,7 +27,7 @@ class Container
     /**
      * Get a service from the container
      *
-     * @param string $service
+     * @param  string $service
      * @return mixed
      * @throws ServiceException
      */
