@@ -2,7 +2,7 @@
 
 namespace Vagif;
 
-use Vagif\Exceptions\ServiceAlreadyExistsException;
+use Vagif\Exceptions\ServiceException;
 
 class Container
 {
@@ -12,7 +12,8 @@ class Container
     protected $services = [];
 
     /**
-     * Binding services to container.
+     * Binding services to container
+     * (User can override the service)
      * 
      * @param string $name Name of the service
      * @param callable $callable Callable
@@ -20,11 +21,23 @@ class Container
      */
     public function bind(string $name, callable $callable): void
     {
-        if (array_key_exists($name, $this->services)) {
-            throw new ServiceAlreadyExistsException("Service: {$name} already exists.");
+        $this->services[$name] = $callable;
+    }
+
+    /**
+     * Get a service from the container
+     *
+     * @param string $service
+     * @return mixed
+     * @throws ServiceException
+     */
+    public function make(string $service)
+    {
+        if (! array_key_exists($service, $this->services)) {
+            throw new ServiceException("Service {$service} doesn't exist !");
         }
 
-        $this->services[$name] = $callable;
+        return call_user_func($this->services[$service], $this);
     }
 
     /**
@@ -34,7 +47,7 @@ class Container
      */
     public function __toString()
     {
-        return implode(
+        return 'Available services: ' . implode(
             ', ', array_keys($this->services)
         );
     }
