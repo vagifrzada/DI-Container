@@ -39,16 +39,4 @@ class Container
 
         return call_user_func($this->services[$service], $this);
     }
-
-    /**
-     * Displaying our services (testing)
-     * 
-     * @return string
-     */
-    public function __toString()
-    {
-        return 'Available services: ' . implode(
-            ', ', array_keys($this->services)
-        );
-    }
 }
