@@ -8,6 +8,8 @@ class Container
 {
     /**
      * Container for services
+     *
+     * @var array $services
      */
     protected $services = [];
 
@@ -15,13 +17,13 @@ class Container
      * Binding services to container
      * (User can override the service)
      * 
-     * @param  string   $name     Name of the service
-     * @param  callable $callable Callable
+     * @param  string $service Name of the service
+     * @param  callable|string $callable
      * @return void
      */
-    public function bind(string $name, callable $callable): void
+    public function bind(string $service, $callable): void
     {
-        $this->services[$name] = $callable;
+        $this->services[$service] = $callable;
     }
 
     /**
@@ -31,12 +33,14 @@ class Container
      * @return mixed
      * @throws ServiceException
      */
-    public function make(string $service)
+    public function resolve(string $service)
     {
         if (! array_key_exists($service, $this->services)) {
             throw new ServiceException("Service {$service} doesn't exist !");
         }
 
-        return call_user_func($this->services[$service], $this);
+        $service = $this->services[$service];
+
+        return is_callable($service) ? call_user_func($service, $this) : $service;
     }
 }
