@@ -9,6 +9,6 @@ use Exception;
  *
  * @package Vagif\Exceptions
  */
-class ServiceException extends Exception
+class ServiceNotFoundException extends Exception
 {
 }

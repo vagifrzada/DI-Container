@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Vagif\Container;
 use PHPUnit\Framework\TestCase;
-use Vagif\Exceptions\ServiceException;
+use Vagif\Exceptions\ServiceNotFoundException;
 
 class ContainerTest extends TestCase
 {
@@ -20,7 +20,7 @@ class ContainerTest extends TestCase
 
     public function testExceptionWhenServiceNotFound()
     {
-        $this->expectException(ServiceException::class);
+        $this->expectException(ServiceNotFoundException::class);
 
         $container = new Container;
         $container->resolve('someService');
@@ -39,5 +39,18 @@ class ContainerTest extends TestCase
         $container->bind('test', [$object, 'testing']);
 
         $this->assertEquals('Testing', $container->resolve('test'));
+    }
+
+    public function testSingletonServices()
+    {
+        $container = new Container;
+        $container->singleton('service', function () {
+            return new \stdClass;
+        });
+
+        $service = $container->resolve('service');
+        $service2 = $container->resolve('service');
+
+        $this->assertSame($service, $service2);
     }
 }
