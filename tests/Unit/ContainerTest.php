@@ -8,6 +8,21 @@ use Vagif\Exceptions\ServiceNotFoundException;
 
 class ContainerTest extends TestCase
 {
+    public function testGetPrimitiveData()
+    {
+        $container = new Container;
+        $container->bind('config', [
+            'host' => '127.0.0.1',
+            'db'   => 'testing'
+        ]);
+
+        $this->assertArrayHasKey('host', $container->resolve('config'));       
+        $this->assertArrayHasKey('db', $container->resolve('config'));
+        
+        $this->assertEquals('127.0.0.1', $container->resolve('config')['host']);
+        $this->assertEquals('testing', $container->resolve('config')['db']);
+    }
+
     public function testGetServiceFromContainer()
     {
         $container = new Container;
@@ -52,5 +67,15 @@ class ContainerTest extends TestCase
         $service2 = $container->resolve('service');
 
         $this->assertSame($service, $service2);
+    }
+
+    public function testContainerWithinContainer()
+    {
+        $container = new Container;
+        $container->bind('containerAgain', function (Container $container) {
+             return $container;   
+        });
+
+        $this->assertSame($container, $container->resolve('containerAgain'));
     }
 }
