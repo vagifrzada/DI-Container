@@ -91,7 +91,7 @@ class Container
      * @return void
      * @throws ServiceNotFoundException
      */
-    protected function checkIfServiceExists(string $service)
+    protected function checkIfServiceExists(string $service): void
     {
         if (! array_key_exists($service, $this->services)) {
             throw new ServiceNotFoundException("Service {$service} doesn't exist !");
