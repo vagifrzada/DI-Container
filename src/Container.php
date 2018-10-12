@@ -53,7 +53,7 @@ class Container
      */
     public function resolve(string $service)
     {
-        $this->checkIfServiceExists($service);
+        $this->checkExistenceOfService($service);
 
         if (isset($this->singletons[$service])) {
             return $this->singletons[$service];
@@ -61,9 +61,7 @@ class Container
 
         $abstract = $this->services[$service];
 
-        $data = is_callable($abstract['value']) 
-            ? call_user_func($abstract['value'], $this) 
-            : $abstract['value'];
+        $data = $this->processService($abstract['value']);
 
         if ($this->isSingletonService($abstract)) {
             $this->singletons[$service] = $data;
@@ -89,10 +87,21 @@ class Container
      * @return void
      * @throws ServiceNotFoundException
      */
-    protected function checkIfServiceExists(string $service): void
+    protected function checkExistenceOfService(string $service): void
     {
         if (! array_key_exists($service, $this->services)) {
-            throw new ServiceNotFoundException("Service {$service} doesn't exist !");
+            throw new ServiceNotFoundException(
+                "Service '{$service}' doesn't exist !"
+            );
         }
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    protected function processService($value)
+    {
+       return is_callable($value) ? call_user_func($value, $this) : $value;
     }
 }
