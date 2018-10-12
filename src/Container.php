@@ -72,6 +72,18 @@ class Container
 
 
     /**
+     * Test if container can provide something for given service
+     *
+     * @param string $service
+     * @return bool
+     */
+    public function has(string $service): bool
+    {
+        return array_key_exists($service, $this->services);
+    }
+
+
+    /**
      * Checking if user attempted to registering singleton services
      *
      * @param array $abstract
@@ -89,7 +101,7 @@ class Container
      */
     protected function checkExistenceOfService(string $service): void
     {
-        if (! array_key_exists($service, $this->services)) {
+        if (! $this->has($service)) {
             throw new ServiceNotFoundException(
                 "Service '{$service}' doesn't exist !"
             );
