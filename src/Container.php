@@ -47,11 +47,9 @@ class Container
     }
 
     /**
-     * Get a service from the container
-     *
-     * @param  string $service
+     * @param string $service
      * @return mixed
-     * @throws ServiceException
+     * @throws ServiceNotFoundException
      */
     public function resolve(string $service)
     {
