@@ -10,7 +10,7 @@ Basic usage
 ===
 
 Registering services:
-```
+```php
     $container = new \Vagif\Container;
     $container->bind(SomeService::class, function () {
         return new SomeService();   
@@ -19,7 +19,7 @@ Registering services:
 
 Note: Additionaly you can use **Container** instance within the container.
 
-```
+```php
     $container = new \Vagif\Container;
     $container->bind(SomeService::class, function (Container $container) {
         $dependency = $container->resolve(Config::class); // passing Config to the service
@@ -28,7 +28,7 @@ Note: Additionaly you can use **Container** instance within the container.
 ```
 
 Getting service out of container:
-``` 
+```php
     $container = new \Vagif\Container;
     $service = $container->resolve(StripeAPI::class);
 ```
