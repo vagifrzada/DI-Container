@@ -24,9 +24,9 @@ class Container
      * Binding services to container
      * (User can override the service)
      * 
-     * @param  string $service Name of the service
+     * @param  string          $service Name of the service
      * @param  callable|string $value
-     * @param  bool $locked
+     * @param  bool            $locked
      * @return void
      */
     public function bind(string $service, $value, $locked = false): void
@@ -37,7 +37,7 @@ class Container
     /**
      * Binding singleton services to container
      * 
-     * @param  string $service Name of the service
+     * @param  string          $service Name of the service
      * @param  callable|string $value
      * @return void
      */
@@ -47,7 +47,7 @@ class Container
     }
 
     /**
-     * @param string $service
+     * @param  string $service
      * @return mixed
      * @throws ServiceNotFoundException
      */
@@ -74,7 +74,7 @@ class Container
     /**
      * Test if container can provide something for given service
      *
-     * @param string $service
+     * @param  string $service
      * @return bool
      */
     public function has(string $service): bool
@@ -86,7 +86,7 @@ class Container
     /**
      * Checking if user attempted to registering singleton services
      *
-     * @param array $abstract
+     * @param  array $abstract
      * @return bool
      */
     protected function isSingletonService(array $abstract): bool
@@ -95,7 +95,7 @@ class Container
     }
 
     /**
-     * @param string $service
+     * @param  string $service
      * @return void
      * @throws ServiceNotFoundException
      */
@@ -109,11 +109,11 @@ class Container
     }
 
     /**
-     * @param $value
+     * @param  $value
      * @return mixed
      */
     protected function processService($value)
     {
-       return is_callable($value) ? call_user_func($value, $this) : $value;
+        return is_callable($value) ? call_user_func($value, $this) : $value;
     }
 }
