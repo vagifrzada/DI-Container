@@ -1,13 +1,13 @@
 Dependency Injection Container (DIC)
-===
+---
 Simple container for services. Inject services into your container and use anywhere you want.
 
 Requirements
-===
+---
 - PHP >= 7.0
 
 Basic usage
-===
+---
 
 Registering services:
 ```php
@@ -34,7 +34,7 @@ Getting service out of container:
 ```
 
 Contributions
-===
+---
 You're welcome to submit patches and new features.
 
 - Please, create a new branch for your feature
@@ -42,7 +42,7 @@ You're welcome to submit patches and new features.
 - Open a new pull request
 
 License
-===
+---
 The MIT License (MIT)
 
 Vagif Rufullazada, vaqifrzade@gmail.com
