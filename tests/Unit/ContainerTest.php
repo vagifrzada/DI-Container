@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Vagif\Tests\Unit;
 
 use Vagif\Container;
 use PHPUnit\Framework\TestCase;
@@ -77,5 +77,23 @@ class ContainerTest extends TestCase
         });
 
         $this->assertSame($container, $container->resolve('containerAgain'));
+    }
+
+    public function testCanBindServicesPassingArrayToContainer()
+    {
+        // This array could be loaded from separate file.
+        $container = new Container([
+                \stdClass::class => function () {
+                    return new \stdClass;
+                },
+                'config' => [
+                    'db' => ['host' => '127.0.0.1'],
+                ],
+         ]);
+
+        $this->assertTrue($container->has(\stdClass::class));
+        $this->assertTrue($container->has('config'));
+        $this->assertInternalType('array', $container->resolve('config'));
+        $this->assertArrayHasKey('db', $container->resolve('config'));
     }
 }

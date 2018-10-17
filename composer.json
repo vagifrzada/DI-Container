@@ -1,6 +1,6 @@
 {
     "name": "vagif/di-container",
-    "description": "Simple Dependency Injection Container",
+    "description": "Simple Dependency Injection Container (DIC)",
     "license": "MIT",
     "authors": [
         {
@@ -23,7 +23,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Vagif\\Tests\\": "tests/"
         }
     },
     "scripts": {

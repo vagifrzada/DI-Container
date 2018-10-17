@@ -21,6 +21,20 @@ class Container
     protected $singletons = [];
 
     /**
+     * Container constructor.
+     *
+     * @param array $services
+     */
+    public function __construct(array $services = [])
+    {
+        if (! empty($services)) {
+            foreach ($services as $serviceName => $value) {
+                $this->bind($serviceName, $value);
+            }
+        }
+    }
+
+    /**
      * Binding services to container
      * (User can override the service)
      * 

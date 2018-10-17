@@ -33,6 +33,13 @@ Getting service out of container:
     $service = $container->resolve(StripeAPI::class);
 ```
 
+Tests
+---
+For tests execute the following command:
+```
+   composer tests
+```
+
 Contributions
 ---
 You're welcome to submit patches and new features.
