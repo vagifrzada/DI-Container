@@ -23,7 +23,16 @@ class ContainerTest extends TestCase
         $this->assertEquals('testing', $container->resolve('config')['db']);
     }
 
-    public function testGetServiceFromContainer()
+    public function testGetObject()
+    {
+        $container = new Container();
+
+        $container->bind(\stdClass::class, new \stdClass());
+
+        $this->assertInstanceOf(\stdClass::class, $container->resolve(\stdClass::class));
+    }
+
+    public function testUsingClosureToGetServiceFromContainer()
     {
         $container = new Container;
         $container->bind('aws', function () {
