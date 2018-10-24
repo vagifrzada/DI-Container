@@ -12,7 +12,7 @@ Basic usage
 Registering services:
 ```php
     $container = new \Vagif\Container;
-    $container->bind(SomeService::class, new UsersController(new UserRepository));
+    $container->bind(UsersController::class, new UsersController(new UserRepository));
 ```
 
 You can register singletons also.
