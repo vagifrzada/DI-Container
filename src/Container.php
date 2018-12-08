@@ -4,17 +4,22 @@ namespace Vagif;
 
 use Vagif\Exceptions\ServiceNotFoundException;
 
+/**
+ * Class Container
+ *
+ * @package Vagif
+ */
 class Container
 {
     /**
-     * Container for services
+     * Container for services.
      *
      * @var array $services
      */
     protected $services = [];
 
     /**
-     * Container for singletons services
+     * Container for singletons services.
      *
      * @var array $singletons
      */
@@ -35,10 +40,10 @@ class Container
     }
 
     /**
-     * Binding services to container
+     * Binding services to container.
      * (User can override the service)
-     * 
-     * @param  string          $service Name of the service
+     *
+     * @param  string          $service Name of the service.
      * @param  callable|string $value
      * @param  bool            $locked
      * @return void
@@ -49,9 +54,9 @@ class Container
     }
 
     /**
-     * Binding singleton services to container
+     * Binding singleton services to container.
      * 
-     * @param  string          $service Name of the service
+     * @param  string          $service Name of the service.
      * @param  callable|string $value
      * @return void
      */
@@ -75,18 +80,18 @@ class Container
 
         $abstract = $this->services[$service];
 
-        $data = $this->processService($abstract['value']);
+        $concrete = $this->processService($abstract['value']);
 
         if ($this->isSingletonService($abstract)) {
-            $this->singletons[$service] = $data;
+            $this->singletons[$service] = $concrete;
         }
 
-        return $data;
+        return $concrete;
     }
 
 
     /**
-     * Test if container can provide something for given service
+     * Test if container can provide something for given service.
      *
      * @param  string $service
      * @return bool
@@ -98,7 +103,7 @@ class Container
 
 
     /**
-     * Checking if user attempted to registering singleton services
+     * Checking if user attempted to registering singleton services.
      *
      * @param  array $abstract
      * @return bool
@@ -123,6 +128,8 @@ class Container
     }
 
     /**
+     * Calling appropriate service.
+     *
      * @param  $value
      * @return mixed
      */
